@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:maps_test/services/auth.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
+
 
   @override
   _RegistrationState createState() => _RegistrationState();
@@ -10,6 +11,7 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
 
+  final authenticate = Authenticate();
 
   bool isHidden = true;
 
@@ -38,11 +40,9 @@ class _RegistrationState extends State<Registration> {
                   child: Container(
                     alignment: Alignment.centerLeft,
                     child:
-                    Image.asset('assets/back.svg'),
+                    Image.asset('back.svg'),
                   ),
                 ),
-
-
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
                   decoration: BoxDecoration(
@@ -68,6 +68,22 @@ class _RegistrationState extends State<Registration> {
                         ),
 
                         const SizedBox(height: 30,),
+
+                        Center(
+                          child: TextFormField(
+                            decoration: const  InputDecoration(
+                              hintText: "Enter email",
+                              hintStyle: TextStyle(
+                                  color: Colors.black
+                              ),
+                            ),
+                            cursorColor: Colors.white,
+                            validator: (val) => val!.isEmpty ? 'Enter Email' : null,
+
+                          ),
+                        ),
+
+                        const SizedBox(height: 20,),
 
                         Center(
                           child: TextFormField(
@@ -103,61 +119,6 @@ class _RegistrationState extends State<Registration> {
 
                         ),
 
-
-                        const SizedBox(height: 20,),
-
-                        // Row(
-                        //   children: [
-                        //
-                        //
-                        //     const Expanded(
-                        //         child: TextButton(
-                        //           onPressed: null,
-                        //           child: Text(
-                        //             '+234',
-                        //             style: TextStyle(color: Colors.black, fontSize: 24),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //
-                        //     const SizedBox(width: 3,),
-                        //
-                        //     Expanded(
-                        //       child: TextFormField(
-                        //         decoration: const InputDecoration(
-                        //           hintText: "Enter your phone number ",
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.blue,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Form(
-                            child: IntlPhoneField(
-                              showDropdownIcon: false,
-                              showCountryFlag: false,
-                              autoValidate: true,
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                ),
-                              ),
-
-                              initialCountryCode: 'IN',
-                            ),
-                          ),
-                        ),
-
                         const SizedBox(height: 20,),
 
                         TextFormField(
@@ -168,21 +129,16 @@ class _RegistrationState extends State<Registration> {
 
                         const SizedBox(height: 20,),
 
-
-                        const SizedBox(height: 30,),
-
-
                         SizedBox(
                           width: double.infinity,
                           height: 50.0,
                           child: Container(
                             width: double.infinity,
-                            child: ElevatedButton
-                              (
+                            child: ElevatedButton(
                               onPressed: () {
-
+                                authenticate.signUpWithEmailAndPassword();
                               },
-                              // color: Colors.deepPurple[600],
+
                               child: const Text(
                                 "Register",
                                 style: TextStyle(fontSize: 12),
@@ -190,18 +146,33 @@ class _RegistrationState extends State<Registration> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 50,),
 
-                      ],
 
-                    ),
-
+                        Center(
+                          child: SizedBox(
+                            height: 50.0,
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Image.asset("google.png"),
+                                  ElevatedButton
+                                    (
+                                    onPressed: () {
+                                      authenticate.signInWithGoogle();
+                                    },
+                                    child: const Text(
+                                      "Sign In With Google",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  )],
+                              ),),
+                          ),
+                        ),
+                      ]),
                   ),
                 )
-              ],
-
-
-            ),
-
+              ]),
           )
       ),
     );

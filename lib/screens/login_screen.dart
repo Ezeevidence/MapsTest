@@ -43,25 +43,22 @@ class _LoginState extends State<Login> {
 
                   const SizedBox(height: 20,),
 
-
-
                   TextFormField(
                     decoration: const InputDecoration(
                       hoverColor: Colors.white,
                       fillColor: Colors.white,
                       focusColor: Colors.white,
-                      hintText: "Enter Username",
-                      hintStyle: const TextStyle(
+                      hintText: "Enter Email",
+                      hintStyle: TextStyle(
                           color: Colors.white
                       ),
                     ),
                     cursorColor: Colors.white,
-                    validator: (val) => val!.isEmpty ? 'Enter Username' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter Email' : null,
 
                   ),
 
                   const SizedBox(height: 20,),
-
 
                   TextFormField(
                     decoration: InputDecoration(
@@ -89,7 +86,7 @@ class _LoginState extends State<Login> {
                     child: Container(
                       alignment: Alignment.centerRight,
                       child: const Text(
-                        "Fogot Password?",
+                        "Forgot Password?",
                         style: TextStyle(
                             color: Colors.white
                         ),
@@ -128,7 +125,7 @@ class _LoginState extends State<Login> {
                       alignment: Alignment.center,
                       child: const Text(
                         "New User? Create a new Account",
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: Colors.white
                         ),
                       ),
